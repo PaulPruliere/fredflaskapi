@@ -19,7 +19,7 @@ def get_request_attributes(path):
 # count how offen attributes match
 def get_matches(path,df):
     attributes = get_request_attributes(path)
-    attributes = [ a for a in attributes if a in df.columns.values] # test if valid attribute 
+    attributes = [ a for a in attributes if a in df.columns.values] # keep valid attribute 
     matches = []
     for attr in attributes:
         matches.extend(df.loc[df["{}".format(attr)]=="x"].index)
