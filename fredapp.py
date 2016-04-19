@@ -8,9 +8,9 @@ app.debug = True
 
 @app.route('/probabilities/<path:path>')
 def probabilities(path):
-	spreadsheet = "dataset-code-challenge - personalities_data.csv"
-	data = fetcher(path,spreadsheet)
-	return render_template("probabilities.html",title="fredapp",data=data)
+    spreadsheet = "dataset-code-challenge - personalities_data.csv"
+    data = fetcher(path,spreadsheet)
+    return render_template("probabilities.html",title="fredapp",data=data)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
