@@ -6,7 +6,7 @@ import requests
 
 # import data spreadsheet as dataframe and reshape it
 def import_data(spreadsheet):
-    df = pd.read_csv(spreadsheet,header=1,index_col="Unnamed: 1")#
+    df = pd.read_csv(spreadsheet,header=1,index_col="Unnamed: 1")
     del df["Unnamed: 0"]
     df = df.T
     return df
@@ -17,16 +17,16 @@ def get_request_attributes(path):
     return attributes
 
 # count how offen attributes match
-def get_matches(path,df):
+def count_matches(path,df):
     attributes = get_request_attributes(path)
-    attributes = [ a for a in attributes if a in df.columns.values] # keep valid attribute 
+    attributes = [ a for a in attributes if a in df.columns.values] # keep valid attributes 
     matches = []
     for attr in attributes:
         matches.extend(df.loc[df["{}".format(attr)]=="x"].index)
     matches = dict(Counter(matches))
     return matches
 
-# normalize counter value to sum up to 1
+# normalize counter values to sum up to 1
 def normalize(counter):
     norm = sum(counter.values())
     counter.update((x,float(y)/norm) for x,y in counter.items())
@@ -40,5 +40,5 @@ def jsonify_counter(counter):
 # wrap up functions above return json array
 def fetcher(path,spreadsheet):
     df = import_data(spreadsheet)
-    probabilities = normalize(get_matches(path,df))
+    probabilities = normalize(count_matches(path,df))
     return jsonify_counter(probabilities)
