@@ -13,9 +13,9 @@ function createGraph() {
                 var w = 1000,
                     h = 800,
                     outerRadius = 300,
-                    innerRadius = 80,
-                    var x = w / 2,
-                    var y = h / 2;
+                    innerRadius = 80;
+                var x = w / 2,
+                    y = h / 2;
 
                 // pie chart config
                 var pie = d3.layout.pie()
