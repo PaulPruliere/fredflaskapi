@@ -41,5 +41,4 @@ The scope of this challenge is to create an API application responding to an end
     - Be able to explain how you resolved the challenge to a couple of people from our team
     - Be able to answer questions about your implementation
 
-All in all the whole event will probably not take longer than 60 minutes. 
-# fredflakapi
+All in all the whole event will probably not take longer than 60 minutes.
