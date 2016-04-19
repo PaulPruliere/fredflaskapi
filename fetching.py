@@ -26,7 +26,7 @@ def count_matches(path,df):
     matches = dict(Counter(matches))
     return matches
 
-# normalize counter values to sum up to 1
+# normalize counter values to add up up to 1
 def normalize(counter):
     norm = sum(counter.values())
     counter.update((x,float(y)/norm) for x,y in counter.items())
