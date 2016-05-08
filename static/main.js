@@ -16,12 +16,15 @@ function createGraph() {
         innerRadius = 80;
     var x = w / 2,
         y = h / 2;
+    
+    var color = d3.scale.category20b();
 
     // pie chart config
     var pie = d3.layout.pie()
             .value(function(d){ return d.probability;})
-            .sort(null)
-            .pad    
+            .startAngle(-Math.PI*0.5)
+            .endAngle(Math.PI*0.5);
+            //.sort(null)
                 
     //arc config
     var arc = d3.svg.arc()
@@ -45,15 +48,16 @@ function createGraph() {
     // draw arc paths
     arcs.append("path")
         .attr("d",arc)
-        .attr("stroke","black");
+        .style("fill", function(d) { return color(d.data.probability); })
+        .attr("stroke","white");
 
     // label arcs
     arcs.append("svg:text")
         .attr("transform", function(d, i) {
             var c = arc.centroid(d);
-            return "translate(" + (c[0]*2-30)+","+c[1]*2+")";
+            return "translate(" + (c[0]*2-43)+","+c[1]*1.85+")";
         })
-        .style("fill", "black")
+        .style("fill", "#323232")
         .style("font", "bold 14px Arial")
         .text(function(d, i) { 
             return data[i].personality; 
@@ -62,11 +66,10 @@ function createGraph() {
     arcs.append("svg:text")
         .attr("transform", function(d, i) {
             var c = arc.centroid(d);
-            return "translate(" + c[0]+","+c[1]+")";
+            return "translate(" +(c[0]-12)+","+c[1]+")";
         })
-        .style("fill", "white")
+        .style("fill", "#191919")
         .style("font", "bold 12px Arial")
         .text(function(d, i){ return d3.round(data[i].probability,2); });
 
 };
-
