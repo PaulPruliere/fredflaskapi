@@ -36,7 +36,11 @@ def get_histo(personalities,matches):
 def compute_error(histo):
     """Compute and spread 20 percent error on each attribute."""
     attr_error = [ (x*0.2)/((len(histo)-1)*0.8) for x in histo]
-    error = [ sum(attr_error) if x == 0.0 else 0 for x in attr_error ]
+
+    #attr_error = [ (sum(histo)*0.2)/((len(histo)-1)*0.8) for x in histo if x != 0]
+    print "attr_error:",attr_error
+    print "sum attr_error:",sum(attr_error)
+    error = [sum(attr_error) if x == 0.0 else 0 for x in attr_error]
     histo_error = [x+y for x,y in zip(histo,error)]
     return histo_error
 
@@ -45,7 +49,7 @@ def normalize(seq):
     normalized = [float(x)/sum(seq) for x in seq]
     return normalized
 
-def threshold(matches,threshold=0.1):
+def threshold(matches,threshold=0.02):
     """Build an "others" category with small values."""
     others = reduce(lambda x,y: x+y,[matches[i] for i in matches if matches[i] < threshold])
     matches = {i:matches[i] for i in matches if matches[i] >= threshold}
