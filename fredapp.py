@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask, render_template
-from fetching import fetcher
+from fetchingBis import fetcher
 
 app = Flask(__name__)
 app.debug = True
