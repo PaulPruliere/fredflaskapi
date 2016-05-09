@@ -36,7 +36,7 @@ def get_histo(personalities,matches):
 def compute_error(histo):
     """Compute and spread 20 percent error on each attribute."""
     attr_error = [ (x*0.2)/((len(histo)-1)*0.8) for x in histo]
-    error = [sum(attr_error) if x == 0.0 else 0 for x in attr_error]
+    error = [sum(attr_error)-attr for attr in attr_error]
     histo_error = [x+y for x,y in zip(histo,error)]
     return histo_error
 
